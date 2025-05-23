@@ -6,22 +6,22 @@ tenant_id = "06698be3-7107-4e65-ac59-1967f7c7c43e"
 resource_group = "krishna_RG"
 
 # Vnet Config Data
-vnet_name = "dev-kk-vnet"
+vnet_name = "qa-kk-vnet"
 vnet_tag = "Dev"
 address_space = ["10.0.0.0/16"]
 
 # Subnets Config Data
 subnet_names  = ["dev-kkvnet-subnet", "dev-sa-subnet"]
-address_prefixes = ["10.0.1.0/24", "10.0.2.0/24"]
+address_prefixes = ["10.2.0.0/24", "10.2.1.0/24"]
 
 # VM Config Data
-nic_name = "kk-dev-nic1"
-vm_public_ip = "kk-devvm-public_ip"
-ip_name = "kk-devvm-ip"
-vm_name = "kk-devvm"
+nic_name = "kk-qa-nic"
+vm_public_ip = "kk-qavm-public_ip"
+ip_name = "kk-qavm-ip"
+vm_name = "kk-qavm"
 vm_size = "Standard_D2s_v3"
-vm_tag = "Dev"
-osdisk = "devdisk1"
+vm_tag = "QA"
+osdisk = "qadisk1"
 computer_name = "Default"
 admin_username = "azureuser"
 admin_password = "Azure@123456"
@@ -30,18 +30,8 @@ remote_directory = "/home/azureuser/kkvm"
 
 # Network Security Group Data
 nsg_name = "kknsg1"
-nsg_tag = "Dev"
-nsg_rule1_name = "dev-inbound"
-nsg_rule2_name = "dev-outbound"
+nsg_tag = "QA"
+nsg_rule1_name = "qa-inbound"
+nsg_rule2_name = "qa-outbound"
 
 
-# Storage Account Data
-sa_name = "kkterrf123"
-sa_container = "dev-tf-state"
-sa_tag = "Dev"
-account_tier = "Standard"
-
-# aks_name = "kk-dev-aks" 
-# aks_nodepool_name = "kkdevaksnp12"
-# aks_tag = "dev"
-# dns_prefix = "kk-dev-aksdns"

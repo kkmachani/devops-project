@@ -6,9 +6,9 @@ on:
      environment:
        description: 'Environment to deploy'
        required: true
-       default: 'dev'
        type: choice
        options:
+         - dev
          - qa
          - prod
 

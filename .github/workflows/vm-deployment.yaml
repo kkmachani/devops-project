@@ -52,4 +52,9 @@ jobs:
         run: terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
 
       - name: Applying the script
-        run: terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"
+        run: |
+          terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"
+          sleep 60
+
+      - name: Destroy Resources
+        run:  terraform destroy -var-file="${{ github.event.inputs.environment }}.tfvars"

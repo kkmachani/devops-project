@@ -1,0 +1,55 @@
+name: VM Deployment
+
+on:
+ workflow_dispatch:
+   inputs:
+     environment:
+       description: 'Environment to deploy'
+       required: true
+       default: 'dev'
+       type: choice
+       options:
+         - qa
+         - prod
+
+jobs:
+  terraform:
+    name: azure-vm-deployment
+    runs-on: self-hosted
+    defaults: 
+     run: 
+      working-directory: environments/${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout repo
+        uses: actions/Checkout@v4
+        with:
+          ref: environments
+
+      - name: Login to azure
+        run: az login --use-device-code
+
+      - name: Checking shell script for Backend
+        run: ls *.sh
+
+      - name: Making the script Executable
+        run: chmod +x *.sh
+          sleep 10
+      
+      - name: Install terraform
+        run: |
+          wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_am6d4.zip
+          unzip terraform_0.13.0_linux_amd64.zip
+          mv terraform /usr/local/bin
+          terraform version 
+
+      - name: Configuring the Backend 
+        run: terraform init -backend-config="backend_config.tfvars"
+
+      - name: Validating the script
+        run:  terraform validate
+          
+      - name: Planning the script 
+        run: terraform plan -var-file="${{ github.event.inputs.environment }}"
+
+      - name: Applying the script
+        run: terraform apply -var-file="${{ github.event.inputs.environment }}"

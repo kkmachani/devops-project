@@ -22,8 +22,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          ref: environments
 
       - name: Login to azure
         run: az login --use-device-code
@@ -32,7 +30,8 @@ jobs:
         run: ls *.sh
 
       - name: Making the script Executable
-        run: chmod +x *.sh
+        run: |
+          chmod +x *.sh
           sleep 10
       
       - name: Install terraform

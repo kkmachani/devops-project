@@ -39,22 +39,31 @@ jobs:
         run: |
           chmod +x *.sh
           sleep 10
+
+      - name: Execute Shell Script
+        run: ./*.sh
       
       - name: Install terraform
         run: |
-          wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amdd4.zip
+          wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip
           unzip terraform_0.13.0_linux_amd64.zip
           mv terraform /usr/local/bin
           terraform version 
 
       - name: Configuring the Backend 
-        run: terraform init -backend-config="backend_config.tfvars"
-
+        run: |
+          terraform init -backend-config="backend_config.tfvars"
+          sleep 10
+        
       - name: Validating the script
-        run:  terraform validate
+        run: | 
+          terraform validate
+          sleep 10
           
       - name: Planning the script 
-        run: terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
+        run: |
+          terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
+          sleep 10
 
       - name: Applying the script
         run: |

@@ -19,6 +19,7 @@ jobs:
     defaults: 
      run: 
       working-directory: environments/${{ github.event.inputs.environment }}
+    
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -36,7 +37,7 @@ jobs:
       
       - name: Install terraform
         run: |
-          wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_am6d4.zip
+          wget https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amdd4.zip
           unzip terraform_0.13.0_linux_amd64.zip
           mv terraform /usr/local/bin
           terraform version 
@@ -48,7 +49,7 @@ jobs:
         run:  terraform validate
           
       - name: Planning the script 
-        run: terraform plan -var-file="${{ github.event.inputs.environment }}"
+        run: terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
 
       - name: Applying the script
-        run: terraform apply -var-file="${{ github.event.inputs.environment }}"
+        run: terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"

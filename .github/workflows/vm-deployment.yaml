@@ -11,7 +11,6 @@ on:
          - dev
          - qa
          - prod
-
 jobs:
   terraform:
     name: azure-vm-deployment

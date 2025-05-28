@@ -34,7 +34,7 @@ module "vnet" {
 
 # Network Security Module
 module "nsg" {
-  source = "git::https://github.com/kkmachani/terraform.git//modules/vnet?ref=qa-modules"
+  source = "git::https://github.com/kkmachani/terraform.git//modules/nsg?ref=qa-modules"
   resource_group = var.resource_group
   nsg_name = var.nsg_name
   nsg_rule1_name = var.nsg_rule1_name
@@ -44,7 +44,7 @@ module "nsg" {
 
 # VM Module
 module "vm" {
-  source = "git::https://github.com/kkmachani/terraform.git//modules/vnet?ref=qa-modules"
+  source = "git::https://github.com/kkmachani/terraform.git//modules/vm?ref=qa-modules"
   resource_group = var.resource_group
   nic_name = var.nic_name
   vm_public_ip = var.vm_public_ip

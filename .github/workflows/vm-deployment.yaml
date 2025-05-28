@@ -13,12 +13,12 @@ on:
          - prod
 
      auto-destroy:
-        description: "Destroy resources after apply"
-        required: false
+        description: 'Destroy resources after apply'
+        required: true
         type: choice
         options:
-          - 'true'
           - 'false'
+          -  'true'
        
 jobs:
   terraform:

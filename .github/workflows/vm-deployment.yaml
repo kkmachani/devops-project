@@ -50,6 +50,11 @@ jobs:
       # - name: Login to azure
       #   run: az login --use-device-code
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Checking shell script for Backend
         run: ls *.sh
 
@@ -65,11 +70,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: latest
-
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
          
       - name: Configuring the Backend 
         run: |

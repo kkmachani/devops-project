@@ -47,8 +47,8 @@ jobs:
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
           az version
 
-      - name: Login to azure
-        run: az login --use-device-code
+      # - name: Login to azure
+      #   run: az login --use-device-code
 
       - name: Checking shell script for Backend
         run: ls *.sh

@@ -11,6 +11,16 @@ on:
          - dev
          - qa
          - prod
+     
+     module:
+       description: "Terrafrom Module to deploy"
+       required: true
+       type: choice
+       options:
+         - vnet
+         - vm
+         - nsg
+     
 
      auto-destroy:
         description: 'Destroy resources after apply'

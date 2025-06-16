@@ -1,4 +1,4 @@
-name: Azure VM Deployment
+name: Vnet Deployment
 
 on:
  workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Azure VM Deployment
+name: VM Deployment
 
 on:
  workflow_dispatch:

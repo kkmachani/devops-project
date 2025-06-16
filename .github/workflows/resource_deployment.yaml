@@ -79,7 +79,7 @@ jobs:
           terraform_version: latest
          
       - name: Configuring the Backend 
-        run: 
+        run: |
           terraform init -backend-config="backend_config.tfvars"
           sleep 10
         working-directory: terraform/environments/${{ github.event.inputs.environment }}

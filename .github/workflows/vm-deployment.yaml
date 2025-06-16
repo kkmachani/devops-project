@@ -33,7 +33,7 @@ on:
 jobs:
   terraform:
     name: azure-vm-deployment
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     defaults: 
      run: 
       working-directory: environments/${{ github.event.inputs.environment }}

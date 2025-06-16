@@ -1,0 +1,109 @@
+name: Azure VM Deployment
+
+on:
+ workflow_dispatch:
+   inputs:
+     environment:
+       description: 'Environment to deploy'
+       required: true
+       type: choice
+       options:
+         - dev
+         - qa
+         - prod
+     
+     module:
+       description: "Terraform Module to deploy"
+       required: true
+       type: choice
+       options:
+         - vnet
+         - vm
+         - nsg
+     
+
+     auto-destroy:
+        description: 'Destroy resources after apply'
+        required: true
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+       
+jobs:
+  terraform:
+    name: azure-vm-deployment
+    runs-on: ubuntu-latest
+    defaults: 
+     run: 
+      working-directory: environments/${{ github.event.inputs.environment }}
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az version
+
+      # - name: Login to azure
+      #   run: az login --use-device-code
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Checking shell script for Backend
+        run: ls *.sh
+
+      - name: Making the script Executable
+        run: |
+          chmod +x *.sh
+          sleep 10
+
+      - name: Execute Shell Script
+        run: ./*.sh
+      
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+         
+      - name: Configuring the Backend 
+        run: |
+          cd terraform/environments/${{ github.event.inputs.environment }}
+          terraform init -backend-config="backend_config.tfvars"
+          sleep 10
+        
+      - name: Validating the script
+        run: | 
+          cd terraform/environments/${{ github.event.inputs.environment }}
+          terraform validate
+          sleep 10
+          
+      - name: Planning the script 
+        run: |
+          cd terraform/environments/${{ github.event.inputs.environment }}
+          terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
+          sleep 10
+
+      - name: Applying the script
+        run: |
+          cd terraform/environments/${{ github.event.inputs.environment }}
+          terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"
+          sleep 60
+
+      - name: Destroy Resources
+        if: ${{ github.event.inputs.auto-destroy == 'true' }}
+        run: |
+         cd terraform/environments/${{ github.event.inputs.environment }}
+         echo "Waiting before destroying resources..."
+         sleep 60
+         terraform destroy -var-file="${{ github.event.inputs.environment }}.tfvars"
+
+
+      - name: Delete the Backend
+        run: |
+          az storage account delete --name ${{ secrets.STORAGE_ACCOUNT }} --resource-group ${{ secrets.RESOURCE_GROUP }} --yes

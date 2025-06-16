@@ -36,14 +36,6 @@ on:
         options:
           - 'No'
           - 'Yes'
-
-     storage-account:
-        description: 'kkterrf123'
-        required: false
-
-     resource-group:
-        description: 'krishna_RG'
-        required: false
        
 jobs:
   terraform:
@@ -121,11 +113,14 @@ jobs:
       - name: Delete Terraform backend
         if: ${{ github.event.inputs.delete-backend == 'Yes' }}
         run: |
-          echo "Deleting Terraform Backend: ${{ github.event.inputs.storage-account }}"
+          echo "Deleting Terraform Backend: $STORAGE_ACCOUNT"
           az storage account delete \
-           --name ${{ github.event.inoputs.storage-account }}\
-           --resource-group ${{ github.event.inputs.resource-group }}\
+           --name "$STORAGE_ACCOUNT" \
+           --resource-group "RESOURCE_GROUP" \
            --yes
+        env:
+          STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+          RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
            
           
       

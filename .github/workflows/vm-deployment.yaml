@@ -13,7 +13,7 @@ on:
          - prod
      
      module:
-       description: "Terrafrom Module to deploy"
+       description: "Terraform Module to deploy"
        required: true
        type: choice
        options:
@@ -73,32 +73,32 @@ jobs:
          
       - name: Configuring the Backend 
         run: |
-          cd terraform/${{ github.event.inputs.environment }}
+          cd terraform/environments/${{ github.event.inputs.environment }}
           terraform init -backend-config="backend_config.tfvars"
           sleep 10
         
       - name: Validating the script
         run: | 
-          cd terraform/${{ github.event.inputs.environment }}
+          cd terraform/environments/${{ github.event.inputs.environment }}
           terraform validate
           sleep 10
           
       - name: Planning the script 
         run: |
-          cd terraform/${{ github.event.inputs.environment }}
+          cd terraform/environments/${{ github.event.inputs.environment }}
           terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
           sleep 10
 
       - name: Applying the script
         run: |
-          cd terraform/${{ github.event.inputs.environment }}
+          cd terraform/environments/${{ github.event.inputs.environment }}
           terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"
           sleep 60
 
       - name: Destroy Resources
         if: ${{ github.event.inputs.auto-destroy == 'true' }}
         run: |
-         cd terraform/${{ github.event.inputs.environment }}
+         cd terraform/environments/${{ github.event.inputs.environment }}
          echo "Waiting before destroying resources..."
          sleep 60
          terraform destroy -var-file="${{ github.event.inputs.environment }}.tfvars"

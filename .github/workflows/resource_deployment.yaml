@@ -1,4 +1,4 @@
-name: VM Deployment
+name: Azure Resource Deployment
 
 on:
  workflow_dispatch:
@@ -21,14 +21,29 @@ on:
          - vm
          - nsg
      
-
      auto-destroy:
         description: 'Destroy resources after apply'
         required: true
         type: choice
         options:
-          - 'false'
-          - 'true'
+          - 'No'
+          - 'Yes'
+
+     delete-backend:
+        description: 'Delete Terraform Backend after auto-destroy'
+        required: true
+        type: choice
+        options:
+          - 'No'
+          - 'Yes'
+
+     storage-account:
+        description: 'kkterrf123'
+        required: false
+
+     resource-group:
+        description: 'krishna_RG'
+        required: false
        
 jobs:
   terraform:
@@ -63,7 +78,7 @@ jobs:
           chmod +x *.sh
           sleep 10
 
-      - name: Execute Shell Script
+      - name: Execute Shell Script for Terraform Backend
         run: ./*.sh
       
       - name: Install terraform
@@ -102,4 +117,15 @@ jobs:
          echo "Waiting before destroying resources..."
          sleep 60
          terraform destroy -var-file="${{ github.event.inputs.environment }}.tfvars"
+
+      - name: Delete Terraform backend
+        if: ${{ github.event.inputs.delete-backend == 'Yes' }}
+        run: |
+          echo "Deleting Terraform Backend: ${{ github.event.inputs.storage-account }}"
+          az storage account delete \
+           --name ${{ github.event.inoputs.storage-account }}\
+           --resource-group ${{ github.event.inputs.resource-group }}\
+           --yes
+           
+          
       

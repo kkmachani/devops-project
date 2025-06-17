@@ -105,10 +105,6 @@ variable "nsg_rule2_name" {
     type = string
 }
 
-variable "nsg_id" {
-    type = string
-}
-
 
 # Storage Account Variables
 variable "sa_name" {

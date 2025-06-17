@@ -18,6 +18,7 @@ output "vm_size" {
 output "subnet_id" {
  value = module.vnet.subnet_id
  }
+
 output "nsg_name" {
     value = module.nsg.nsg_name
 }

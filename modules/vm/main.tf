@@ -25,7 +25,7 @@ resource "azurerm_network_interface" "nic" {
 
   ip_configuration {
     name                          = var.ip_name
-    subnet_id                     = var.subnet_id
+    subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm_public_ip.id
   }
@@ -37,7 +37,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_network_interface_security_group_association" "nsgnic" {
   network_interface_id      = azurerm_network_interface.nic.id
-  network_security_group_id = var.nsg_id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 
   lifecycle {
     ignore_changes = [  network_interface_id, network_security_group_id  ]

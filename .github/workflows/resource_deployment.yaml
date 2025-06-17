@@ -85,30 +85,30 @@ jobs:
         working-directory: environments/${{ github.event.inputs.environment }}
         
       - name: Validating the script
-        run: | 
-          cd terraform/environments/${{ github.event.inputs.environment }}
+        run: |
           terraform validate
           sleep 10
-          
+        working-directory: environments/${{ github.event.inputs.environment }}  
+        
       - name: Planning the script 
-        run: |
-          cd environments/${{ github.event.inputs.environment }}
+        run: |          
           terraform plan -var-file="${{ github.event.inputs.environment }}.tfvars"
           sleep 10
-
+        working-directory: environments/${{ github.event.inputs.environment }}
+        
       - name: Applying the script
-        run: |
-          cd environments/${{ github.event.inputs.environment }}
+        run: 
           terraform apply -var-file="${{ github.event.inputs.environment }}.tfvars"
           sleep 60
+        working-directory: environments/${{ github.event.inputs.environment }}
 
       - name: Destroy Resources
         if: ${{ github.event.inputs.auto-destroy == 'true' }}
-        run: |
-         cd environments/${{ github.event.inputs.environment }}
+        run: |        
          echo "Waiting before destroying resources..."
          sleep 60
          terraform destroy -var-file="${{ github.event.inputs.environment }}.tfvars"
+        working-directory: environments/${{ github.event.inputs.environment }}
 
       - name: Delete Terraform backend
         if: ${{ github.event.inputs.delete-backend == 'Yes' }}

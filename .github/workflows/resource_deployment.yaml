@@ -21,22 +21,6 @@ on:
          - vm
          - nsg
          - storage
-     
-     auto-destroy:
-        description: 'Destroy resources after apply'
-        required: true
-        type: choice
-        options:
-          - 'No'
-          - 'Yes'
-
-     delete-backend:
-        description: 'Delete Terraform Backend after auto-destroy'
-        required: true
-        type: choice
-        options:
-          - 'No'
-          - 'Yes'
        
 jobs:
   terraform:

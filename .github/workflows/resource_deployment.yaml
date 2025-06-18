@@ -20,6 +20,7 @@ on:
          - vnet
          - vm
          - nsg
+         - storage
      
      auto-destroy:
         description: 'Destroy resources after apply'

@@ -65,3 +65,14 @@ module "vm" {
   #  destination = "/tmp/$(basename ${var.local_file_path})"
 }
 
+# Storage Account Module
+module "storage" {
+  source = "git::https://github.com/kkmachani/terraform.git//modules/vm?ref=dev-modules"
+  resource_group = var.resource_group
+  sa_name = var.sa_name
+  account_tier = var.account_tier
+  sa_container = var.sa_container
+  sa_tag = var.sa_tag
+}
+  
+  

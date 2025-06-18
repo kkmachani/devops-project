@@ -1,0 +1,96 @@
+name: Destroy Resource Deployment
+
+on:
+ workflow_dispatch:
+   inputs:
+     environment:
+       description: 'Delete Resource Deployment'
+       required: true
+       type: choice
+       options:
+         - dev
+         - qa
+         - prod
+
+     module:
+       description: "Terraform Module to deploy"
+       required: true
+       type: choice
+       options:
+         - vnet
+         - vm
+         - nsg
+         - storage
+
+     auto-destroy:
+        description: 'Destroy resources after apply'
+        required: true
+        type: choice
+        options:
+          - 'No'
+          - 'Yes'
+
+     delete-backend:
+        description: 'Delete Terraform Backend after auto-destroy'
+        required: true
+        type: choice
+        options:
+          - 'No'
+          - 'Yes'
+
+
+jobs:
+  terraform-destroy:
+    if: ${{ github.event.inputs.auto-destroy == "Yes" }}
+    name: Destroy-${{ github.event.inputs.module }}-deployment
+    runs-on: ubuntu-latest
+    environment: destroy
+    permissions:
+      contents: write
+    defaults: 
+     run: 
+      working-directory: environments/${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+          az version
+
+      - name: Login to azure
+        run: az login --use-device-code
+
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+
+      - name: Configuring the Backend 
+        run: |
+          terraform init -backend-config="backend_config.tfvars"
+          sleep 10
+        working-directory: environments/${{ github.event.inputs.environment }}
+
+      - name: Destroy Resources
+        if: ${{ github.event.inputs.auto-destroy == 'Yes' }}
+        run: |        
+         terraform destroy -target=module.${{ github.event.inputs.module }} -var-file="${{ github.event.inputs.environment }}.tfvars" -auto-approve
+        working-directory: environments/${{ github.event.inputs.environment }}
+
+      - name: Delete Terraform backend
+        if: ${{ github.event.inputs.delete-backend == 'Yes' }}
+        run: |
+          echo "Deleting Terraform Backend: $STORAGE_ACCOUNT"
+          az storage account delete \
+           --name "$STORAGE_ACCOUNT" \
+           --resource-group "$RESOURCE_GROUP" \
+           --yes
+        env:
+          STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+          RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+
+
+      

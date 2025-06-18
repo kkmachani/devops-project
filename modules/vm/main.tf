@@ -37,7 +37,7 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_network_interface_security_group_association" "nsgnic" {
   network_interface_id      = azurerm_network_interface.nic.id
-  network_security_group_id = azurerm_network_security_group.nsg.id
+  network_security_group_id = azurerm_network_security_group.nsgnic.id
 
   lifecycle {
     ignore_changes = [  network_interface_id, network_security_group_id  ]

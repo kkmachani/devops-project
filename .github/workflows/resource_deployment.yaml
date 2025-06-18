@@ -103,7 +103,7 @@ jobs:
         working-directory: environments/${{ github.event.inputs.environment }}
 
       - name: Destroy Resources
-        if: ${{ github.event.inputs.auto-destroy == 'true' }}
+        if: ${{ github.event.inputs.auto-destroy == 'Yes' }}
         run: |        
          terraform destroy -target=module.${{ github.event.inputs.module }} -var-file="${{ github.event.inputs.environment }}.tfvars" -auto-approve
         working-directory: environments/${{ github.event.inputs.environment }}

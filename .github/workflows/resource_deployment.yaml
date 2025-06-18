@@ -104,8 +104,6 @@ jobs:
       - name: Destroy Resources
         if: ${{ github.event.inputs.auto-destroy == 'true' }}
         run: |        
-         echo "Waiting before destroying resources..."
-         sleep 60
          terraform destroy -target=module.${{ github.event.inputs.module }} -var-file="${{ github.event.inputs.environment }}.tfvars" -auto-approve
         working-directory: environments/${{ github.event.inputs.environment }}
 

@@ -71,7 +71,6 @@ jobs:
       - name: Configuring the Backend 
         run: |
           terraform init -backend-config="backend_config.tfvars"
-          sleep 10
         working-directory: environments/${{ github.event.inputs.environment }}
 
       - name: Destroy Resources

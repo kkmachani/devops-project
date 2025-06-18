@@ -39,7 +39,7 @@ on:
        
 jobs:
   terraform:
-    name: azure-vm-deployment
+    name: azure-${{ github.event.inputs.module }}-deployment
     runs-on: ubuntu-latest
     defaults: 
      run: 

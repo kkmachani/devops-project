@@ -41,7 +41,7 @@ on:
 
 jobs:
   terraform-destroy:
-    if: ${{ github.event.inputs.auto-destroy == "Yes" }}
+    if: ${{ github.event.inputs.auto-destroy == 'Yes' }}
     name: Destroy-${{ github.event.inputs.module }}-deployment
     runs-on: ubuntu-latest
     environment: destroy

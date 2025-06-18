@@ -1,6 +1,6 @@
 # Provider Configuration
-subscription_id = "1fe9963c-1fe2-4dcc-83a7-b49978ffb277"
-tenant_id = "06698be3-7107-4e65-ac59-1967f7c7c43e"
+# subscription_id = "1fe9963c-1fe2-4dcc-83a7-b49978ffb277"
+# tenant_id = "06698be3-7107-4e65-ac59-1967f7c7c43e"
 
 # Resource Group 
 resource_group = "krishna_RG"

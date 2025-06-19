@@ -11,7 +11,6 @@ output "subnet_ids" {
     value = module.vnet.subnet_ids
 }
 
-# VM Output Variables
 output "vm_name" {
     value = module.vm.vm_name
 }
@@ -24,7 +23,6 @@ output "vm_subnet_id" {
     value = module.vnet.vm_subnet_id
  }
 
-# NSG Output Variables
 output "nsg_name" {
     value = module.nsg.nsg_name
 }

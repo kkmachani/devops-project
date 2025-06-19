@@ -1,3 +1,4 @@
+
 data "azurerm_resource_group" "existing_rg" {
   name = var.resource_group
 }
@@ -24,7 +25,7 @@ resource "azurerm_network_interface" "nic" {
   resource_group_name = data.azurerm_resource_group.existing_rg.name
 
   ip_configuration {
-    name                          = var.ip_name
+    name                          = azurerm_public_ip.vm_public_ip.name
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm_public_ip.id
@@ -82,7 +83,7 @@ resource "azurerm_virtual_machine" "vm" {
   }
   
   lifecycle {
-    ignore_changes = [ vm.name, storage_os_disk.name, tags.environment ]
+    ignore_changes = [ name, storage_os_disk, tags.environment ]
   }
 
 
@@ -116,5 +117,3 @@ resource "azurerm_virtual_machine" "vm" {
     }
   }
 }
-
-

@@ -11,7 +11,7 @@ provider "azurerm" {
   features {}
 
   subscription_id = var.subscription_id
-  # tenant_id = var.tenant_id
+  tenant_id = var.tenant_id
 }
 
 
@@ -23,7 +23,7 @@ terraform {
 
 # Vnet Module
 module "vnet" {
- source = "git::https://github.com/kkmachani/terraform.git//modules/vnet?ref=qa-modules"
+ source = "../../modules/vnet"
  resource_group = var.resource_group
  vnet_name = var.vnet_name
  vnet_tag = var.vnet_tag
@@ -34,7 +34,7 @@ module "vnet" {
 
 # Network Security Module
 module "nsg" {
-  source = "git::https://github.com/kkmachani/terraform.git//modules/nsg?ref=qa-modules"
+  source = "../../modules/nsg"
   resource_group = var.resource_group
   nsg_name = var.nsg_name
   nsg_rule1_name = var.nsg_rule1_name
@@ -44,12 +44,11 @@ module "nsg" {
 
 # VM Module
 module "vm" {
-  source = "git::https://github.com/kkmachani/terraform.git//modules/vm?ref=qa-modules"
+  source = "../../modules/vm"
   resource_group = var.resource_group
   nic_name = var.nic_name
   vm_public_ip = var.vm_public_ip
-  ip_name =  var.ip_name
-  subnet_id = module.vnet.subnet_id
+  subnet_id = module.vnet.vm_subnet_id
   nsg_id = module.nsg.nsg_id
   vm_name = var.vm_name
   vm_size = var.vm_size
@@ -63,3 +62,10 @@ module "vm" {
   #  destination = "/tmp/$(basename ${var.local_file_path})"
 }
 
+# Public IP Module
+module "public_ip" {
+  source = "../../modules/public_ip"
+  resource_group = var.resource_group
+  ip_names = var.ip_names
+  ip_tag = var.ip_tag
+}

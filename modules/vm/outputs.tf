@@ -5,3 +5,4 @@ output "vm_name" {
 output "vm_size" {
     value = azurerm_virtual_machine.vm.vm_size
 }
+

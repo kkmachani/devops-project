@@ -18,8 +18,8 @@ variable "resource_group" {
   type = string
 }
 
-
 # Virtual Network  Variables
+
 variable "vnet_name" {
   type = string
 }
@@ -41,8 +41,8 @@ variable "address_prefixes" {
 }
 
 
-
 # Virtual Machine Variables
+
 variable "vm_public_ip" {
     type = string 
 }
@@ -51,7 +51,11 @@ variable "nic_name" {
     type = string
 }
 
-variable "ip_name" {
+# variable "vm_ip_name" {
+#     type = string
+# }
+
+variable "subnet_id" {
     type = string
 }
 
@@ -93,6 +97,7 @@ variable "remote_directory" {
 
 
 # Network Security Group Variables
+
 variable "nsg_name" {
     type = string
 }
@@ -109,8 +114,13 @@ variable "nsg_rule2_name" {
     type = string
 }
 
+variable "nsg_id" {
+    type = string
+}
+
 
 # Storage Account Variables
+
 variable "sa_name" {
     type = string
 }
@@ -124,5 +134,15 @@ variable "sa_tag" {
 }
 
 variable "sa_container" {
+    type = string
+}
+
+# Public IP Variables
+
+variable "ip_names" {
+    type = list(string)
+}
+
+variable "ip_tag" {
     type = string
 }

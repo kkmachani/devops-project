@@ -27,4 +27,3 @@ resource "azurerm_subnet" "subnet" {
     ignore_changes = [ name, address_prefixes, virtual_network_name ]
     }
 }
-

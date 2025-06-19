@@ -20,7 +20,7 @@ on:
          - vnet
          - vm
          - nsg
-         - storage
+         - public_ip
        
 jobs:
   terraform:

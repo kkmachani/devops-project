@@ -7,20 +7,20 @@ resource_group = "krishna_RG"
 
 # Vnet Config Data
 vnet_name = "prod-kk-vnet"
-vnet_tag = "prod"
+vnet_tag = "Prod"
 address_space = ["10.0.0.0/16"]
 
 # Subnets Config Data
-subnet_names  = ["prod-kkvnet-subnet", "prod-sa-subnet"]
-address_prefixes = ["10.0.1.0/24", "10.0.2.0/24"]
+subnet_names  = ["prod-kkvm-subnet", "prod-sa-subnet", "prod-agw-subnet"]
+address_prefixes = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 
 # VM Config Data
-nic_name = "prod-dev-nic1"
-vm_public_ip = "prod-vm-public_ip"
-ip_name = "kk-prodvm-ip"
-vm_name = "kk-prodvm"
+nic_name = "kk-dev-nic1"
+vm_public_ip = "kk-prodvm-public_ip"
+# vm_ip_name = "kk-prodvm-ip"
+vm_name = "kk-prod-vm"
 vm_size = "Standard_D2s_v3"
-vm_tag = "PROD"
+vm_tag = "Prod"
 osdisk = "proddisk1"
 computer_name = "Default"
 admin_username = "azureuser"
@@ -29,10 +29,22 @@ local_file_path = "C:/Users/Krishnakumar.m/Desktop/Storage_acc.sh"
 remote_directory = "/home/azureuser/kkvm"
 
 # Network Security Group Data
-nsg_name = "kk-prod-nsg"
-nsg_tag = "PROD"
+nsg_name = "kkprodnsg1"
+nsg_tag = "Prod"
 nsg_rule1_name = "prod-inbound"
 nsg_rule2_name = "prod-outbound"
+
+
+# Storage Account Data
+sa_name = "kkterrf123"
+sa_container = "prod-tf-state"
+sa_tag = "Prod"
+account_tier = "Standard"
+
+
+# Public IP Data
+ip_names = ["agw-prod-ip", "lb-prod-ip"]
+ip_tag = "Prod"
 
 
 

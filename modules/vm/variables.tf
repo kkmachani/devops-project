@@ -6,10 +6,6 @@ variable "nic_name" {
     type = string
 }
 
-variable "ip_name" {
-    type = string
-}
-
 variable "vm_public_ip" {
     type = string
 }
@@ -57,4 +53,3 @@ variable "remote_directory" {
 variable "nsg_id" {
     type = string
 }
-

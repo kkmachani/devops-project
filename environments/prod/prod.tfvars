@@ -15,7 +15,7 @@ subnet_names  = ["prod-kkvm-subnet", "prod-sa-subnet", "prod-agw-subnet"]
 address_prefixes = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 
 # VM Config Data
-nic_name = "kk-dev-nic1"
+nic_name = "kk-prod-nic1"
 vm_public_ip = "kk-prodvm-public_ip"
 # vm_ip_name = "kk-prodvm-ip"
 vm_name = "kk-prod-vm"
@@ -46,5 +46,13 @@ account_tier = "Standard"
 ip_names = ["agw-prod-ip", "lb-prod-ip"]
 ip_tag = "Prod"
 
-
+# Application Gateway Data
+agw_name = "kk-prod-agw"
+gateway_ip_configuration = "kk-agw-gwip"
+frontend_port = "kk-agw-feport"
+frontend_ip_configuration = "kk-agw-feipconfig"
+backend_address_pool = "kk-agw-beap"
+backend_http_settings = "kk-agw-behttp"
+http_listener = "kk-agw-listner"
+request_routing_rule = "kk-agw-rrr"
 

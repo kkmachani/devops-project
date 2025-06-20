@@ -21,6 +21,7 @@ on:
          - vm
          - nsg
          - public_ip
+         - agw
        
 jobs:
   terraform:

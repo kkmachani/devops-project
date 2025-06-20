@@ -11,10 +11,6 @@ output "subnet_ids" {
     value = module.vnet.subnet_ids
 }
 
-output "agw_ip_id" {
-    value = module.public_ip.agw_ip_id
-}
-
 output "vm_subnet_id" {
     value = module.vnet.vm_subnet_id
  }
@@ -63,16 +59,3 @@ output "agw_subnet_id" {
 output "agw_ip_id" {
   value = module.public_ip.agw_ip_id
 }
- 
-
-# output "aks_name" {
-#  value = module.aks.aks_name
-# }
-
-# output "dns_prefix" {
-#  value = module.aks.dns_prefix
-# }
-
-# output "aks_nodepool" {
-#  value = module.aks.aks_nodepool
-# }

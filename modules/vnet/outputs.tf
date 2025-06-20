@@ -15,3 +15,7 @@ output "subnet_ids" {
 output "vm_subnet_id" {
   value = azurerm_subnet.subnet[0].id
 }
+
+output "agw_subnet_id" {
+  value = azurerm_subnet.subnet[2].id
+}

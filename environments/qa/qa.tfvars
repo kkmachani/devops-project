@@ -45,3 +45,13 @@ account_tier = "Standard"
 # Public IP Data
 ip_names = ["agw-ip", "lb-ip"]
 ip_tag = "QA"
+
+# Application Gateway Data
+agw_name = "kk-qa-agw"
+gateway_ip_configuration = "kk-agw-gwip"
+frontend_port = "kk-agw-feport"
+frontend_ip_configuration = "kk-agw-feipconfig"
+backend_address_pool = "kk-agw-beap"
+backend_http_settings = "kk-agw-behttp"
+http_listener = "kk-agw-listner"
+request_routing_rule = "kk-agw-rrr"

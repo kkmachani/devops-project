@@ -11,6 +11,11 @@ output "subnet_ids" {
     value = module.vnet.subnet_ids
 }
 
+output "vm_subnet_id" {
+    value = module.vnet.vm_subnet_id
+ }
+
+# VM Output Variables
 output "vm_name" {
     value = module.vm.vm_name
 }
@@ -19,10 +24,7 @@ output "vm_size" {
     value = module.vm.vm_size
 }
 
-output "vm_subnet_id" {
-    value = module.vnet.vm_subnet_id
- }
-
+# Network Security Group Output Variables
 output "nsg_name" {
     value = module.nsg.nsg_name
 }
@@ -39,6 +41,7 @@ output "ip_names" {
 output "ip_ids" { 
   value = module.public_ip.ip_ids
 }
+
 
 # Application Gateway
 output "agw_name" {

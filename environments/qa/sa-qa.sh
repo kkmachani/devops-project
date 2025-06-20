@@ -4,7 +4,7 @@
 RESOURCE_GROUP="krishna_RG"
 STORAGE_ACCOUNT="kkterrf123"
 CONTAINER_NAME="qa-tf-state"
-LOCATION="southindia"
+LOCATION="centralus"
 
 # Check if the resource group exists
 echo "Checking if Resource Group $RESOURCE_GROUP exists ..."

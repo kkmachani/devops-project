@@ -23,6 +23,6 @@ resource "azurerm_linux_web_app" "aps" {
   }
 
    tags = {
-      Env = "Dev"
+      Env = "QA"
     }
 }

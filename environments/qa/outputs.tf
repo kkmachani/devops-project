@@ -59,3 +59,12 @@ output "agw_subnet_id" {
 output "agw_ip_id" {
   value = module.public_ip.agw_ip_id
 }
+
+# App Service
+output "asp_sku_name" {
+  value = module.app_svc.asp_sku_name
+}
+
+output "aps_name" {
+  value = module.app_svc.aps_name
+}

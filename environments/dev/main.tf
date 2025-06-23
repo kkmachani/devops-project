@@ -85,3 +85,11 @@ module "agw" {
   http_listener = var.http_listener
   request_routing_rule = var.request_routing_rule
 }
+
+# App Service
+module "app_svc" {
+  source = "../../modules/app_svc"
+  resource_group = var.resource_group
+  aps = var.aps
+  asp = var.asp
+}

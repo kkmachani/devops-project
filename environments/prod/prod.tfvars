@@ -56,3 +56,6 @@ backend_http_settings = "kk-agw-behttp"
 http_listener = "kk-agw-listner"
 request_routing_rule = "kk-agw-rrr"
 
+# App Service Data
+aps = "kk-prod-aps"
+asp = "kk-prod-asp"

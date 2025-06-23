@@ -188,3 +188,12 @@ variable "http_listener" {
 variable "request_routing_rule" {
    type = string
 }
+
+# App Service Webapp
+variable "asp" {
+    type = string
+}
+
+variable "aps" {
+    type = string
+}

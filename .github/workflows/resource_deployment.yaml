@@ -22,6 +22,7 @@ on:
          - nsg
          - public_ip
          - agw
+         - app_svc
        
 jobs:
   terraform:

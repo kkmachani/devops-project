@@ -57,5 +57,5 @@ http_listener = "kk-agw-listner"
 request_routing_rule = "kk-agw-rrr"
 
 # App Service Data
-aps = "kk-dev-aps"
-asp = "kk-dev-asp"
+aps = "kk-qa-aps"
+asp = "kk-qa-asp"

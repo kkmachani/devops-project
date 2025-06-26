@@ -1,0 +1,15 @@
+name: SonarQube Installation
+
+on:
+ push:
+   branches:
+     - main
+
+jobs:
+  sonarqube-installation-in-azure-vm:
+    name: Installing-Sonarqube
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 
+      

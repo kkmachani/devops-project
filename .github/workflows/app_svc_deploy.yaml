@@ -19,7 +19,7 @@ jobs:
           fi
           sleep 10
 
-             # To Create "Staging" Deployment slot 
+        # To Create "Staging" Deployment slot 
       - name: Creating a staging Deployment slot
         run: |
           if ! az webapp deployment slot list --name ${{ vars.AZURE_APP_SERVICE_NAME }} --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} | grep -q '"name": "staging"'; then

@@ -23,7 +23,7 @@ terraform {
 
 # Vnet Module
 module "vnet" {
- source = source = "git::https://github.com/kkmachani/devops-project.git//modules/vnet?ref=dev-modules"
+ source = "git::https://github.com/kkmachani/devops-project.git//modules/vnet?ref=dev-modules"
  resource_group = var.resource_group
  vnet_name = var.vnet_name
  vnet_tag = var.vnet_tag
@@ -34,7 +34,7 @@ module "vnet" {
 
 # Network Security Module
 module "nsg" {
-  source = "../../modules/nsg"
+  source = "git::https://github.com/kkmachani/devops-project.git//modules/nsg?ref=dev-modules"
   resource_group = var.resource_group
   nsg_name = var.nsg_name
   nsg_rule1_name = var.nsg_rule1_name
@@ -44,7 +44,7 @@ module "nsg" {
 
 # VM Module
 module "vm" {
-  source = "../../modules/vm"
+  source = "git::https://github.com/kkmachani/devops-project.git//modules/vm?ref=dev-modules"
   resource_group = var.resource_group
   nic_name = var.nic_name
   vm_public_ip = var.vm_public_ip
@@ -64,7 +64,7 @@ module "vm" {
 
 # Public IP Module
 module "public_ip" {
-  source = "../../modules/public_ip"
+  source = "git::https://github.com/kkmachani/devops-project.git//modules/public_ip?ref=dev-modules"
   resource_group = var.resource_group
   ip_names = var.ip_names
   ip_tag = var.ip_tag
@@ -72,7 +72,7 @@ module "public_ip" {
 
 # Application Gateway Module
 module "agw" {
-  source = "../../modules/agw"
+  source = "git::https://github.com/kkmachani/devops-project.git//modules/agw?ref=dev-modules"
   resource_group = var.resource_group
   agw_name = var.agw_name
   gateway_ip_configuration = var.gateway_ip_configuration
@@ -88,7 +88,7 @@ module "agw" {
 
 # App Service
 module "app_svc" {
-  source = "../../modules/app_svc"
+  source = "git::https://github.com/kkmachani/devops-project.git//modules/app_svc?ref=dev-modules"
   resource_group = var.resource_group
   aps = var.aps
   asp = var.asp

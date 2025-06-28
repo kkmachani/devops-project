@@ -23,7 +23,7 @@ terraform {
 
 # Vnet Module
 module "vnet" {
- source = "../../modules/vnet"
+ source = source = "git::https://github.com/kkmachani/devops-project.git//modules/vnet?ref=dev-modules"
  resource_group = var.resource_group
  vnet_name = var.vnet_name
  vnet_tag = var.vnet_tag

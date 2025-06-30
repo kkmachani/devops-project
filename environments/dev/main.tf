@@ -76,7 +76,7 @@ module "agw" {
   resource_group = var.resource_group
   agw_name = var.agw_name
   gateway_ip_configuration = var.gateway_ip_configuration
-  ag_subnet_id = module.vnet.agw_subnet_id
+  ag_subnet_id = module.vnet.ag_subnet_id
   frontend_port = var.frontend_port
   frontend_ip_configuration = var.frontend_ip_configuration
   agw_ip_id = module.public_ip.agw_ip_id

@@ -53,7 +53,7 @@ output "gateway_ip_configuration" {
 }
 
 output "ag_subnet_id" {
-  value = module.vnet.agw_subnet_id
+  value = module.vnet.ag_subnet_id
 }
 
 output "agw_ip_id" {
